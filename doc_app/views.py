@@ -16,9 +16,17 @@ from sendgrid.helpers.mail import *
 
 from datetime import date
 
+from drf_yasg.utils import swagger_auto_schema
+
+
 # Create your views here.
+def Landing(request):
+    title = 'welcome'
+    return render(request,'landing.html',{"title":title,})
+
 @permission_classes([AllowAny,])
 class Contacts(APIView):
+    @swagger_auto_schema(request_body=ContactSerializer)
     def post(self, request):
         serializer = ContactSerializer(data=request.data)
         if serializer.is_valid():
