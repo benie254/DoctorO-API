@@ -33,12 +33,11 @@ class Contacts(APIView):
             })
             msg2 = render_to_string('email/msg-sent.html', {
                 'name': name,
-                'email': email,
                 'message': message,
             })
             message = Mail(
                 from_email = Email("davinci.monalissa@gmail.com"),
-                to_emails = "fullstack.beniee@gmail.com",
+                to_emails = "fullstack.benie@gmail.com",
                 subject = "New Message",
                 html_content = msg
             )
