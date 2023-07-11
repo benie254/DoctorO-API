@@ -31,7 +31,7 @@ class Contacts(APIView):
                 'email': email,
                 'message': message,
             })
-            msg2 = render_to_string('email/msg-delivered.html', {
+            msg2 = render_to_string('email/msg-sent.html', {
                 'name': name,
                 'email': email,
                 'message': message,
