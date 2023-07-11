@@ -14,6 +14,8 @@ from decouple import config
 import sendgrid 
 from sendgrid.helpers.mail import *
 
+from datetime import date
+
 # Create your views here.
 @permission_classes([AllowAny,])
 class Contacts(APIView):
@@ -26,14 +28,17 @@ class Contacts(APIView):
             contact = serializer.save()
             contact.refresh_from_db()
             sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
+            year = date.today().year
             msg = render_to_string('email/msg-new.html', {
                 'name': name,
                 'email': email,
                 'message': message,
+                'year': year,
             })
             msg2 = render_to_string('email/msg-sent.html', {
                 'name': name,
                 'message': message,
+                'year': year,
             })
             message = Mail(
                 from_email = Email("davinci.monalissa@gmail.com"),
