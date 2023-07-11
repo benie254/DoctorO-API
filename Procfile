@@ -1,0 +1,1 @@
+web: manage.py migrate && gunicorn 'doc_proj.wsgi'

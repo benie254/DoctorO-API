@@ -10,6 +10,7 @@ django-cors-headers==4.2.0
 django-rest-knox==4.2.0
 djangorestframework==3.14.0
 drf-yasg==1.21.6
+gunicorn==20.1.0
 inflection==0.5.1
 packaging==23.1
 psycopg2-binary==2.9.6
@@ -25,3 +26,4 @@ sqlparse==0.4.4
 starkbank-ecdsa==2.2.0
 typing_extensions==4.7.1
 uritemplate==4.1.1
+whitenoise==6.5.0
