@@ -33,8 +33,7 @@ class Contacts(APIView):
             name = serializer.validated_data['name']
             email = serializer.validated_data['email']
             message = serializer.validated_data['message']
-            contact = serializer.save()
-            contact.refresh_from_db()
+            serializer.save()
             sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
             year = date.today().year
             msg = render_to_string('email/msg-new.html', {
@@ -54,7 +53,15 @@ class Contacts(APIView):
                 subject = "New Message",
                 html_content = msg
             )
-            message = Mail(
+            try:
+                sendgrid_client = sendgrid.SendGridAPIClient(config('SENDGRID_API_KEY'))
+                response = sendgrid_client.send(message)
+                print(response.status_code)
+                print(response.body)
+                print(response.headers)
+            except Exception as e:
+                print(e)
+            message2 = Mail(
                 from_email = Email("davinci.monalissa@gmail.com"),
                 to_emails = email,
                 subject = "Message Delivered",
@@ -62,7 +69,7 @@ class Contacts(APIView):
             )
             try:
                 sendgrid_client = sendgrid.SendGridAPIClient(config('SENDGRID_API_KEY'))
-                response = sendgrid_client.send(message)
+                response = sendgrid_client.send(message2)
                 print(response.status_code)
                 print(response.body)
                 print(response.headers)
