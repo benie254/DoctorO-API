@@ -49,7 +49,7 @@ class Contacts(APIView):
             })
             message = Mail(
                 from_email = Email("davinci.monalissa@gmail.com"),
-                to_emails = "fullstack.benie@gmail.com",
+                to_emails = "fowiti@africaonline.co.ke",
                 subject = "New Message",
                 html_content = msg
             )
